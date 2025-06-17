@@ -5,14 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TaskCard } from "@/components/TaskCard";
+import { CreateTaskModal } from "@/components/CreateTaskModal";
 import { mockTasks } from "@/data/mockData";
 
 const Tasks = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
+  const [tasks, setTasks] = useState(mockTasks);
 
-  const filteredTasks = mockTasks.filter(task => {
+  const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          task.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || task.status === statusFilter;
@@ -22,10 +24,14 @@ const Tasks = () => {
   });
 
   const taskCounts = {
-    total: mockTasks.length,
-    todo: mockTasks.filter(t => t.status === 'todo').length,
-    in_progress: mockTasks.filter(t => t.status === 'in_progress').length,
-    completed: mockTasks.filter(t => t.status === 'completed').length,
+    total: tasks.length,
+    todo: tasks.filter(t => t.status === 'todo').length,
+    in_progress: tasks.filter(t => t.status === 'in_progress').length,
+    completed: tasks.filter(t => t.status === 'completed').length,
+  };
+
+  const handleTaskCreated = (newTask: any) => {
+    setTasks(prev => [...prev, newTask]);
   };
 
   return (
@@ -33,32 +39,34 @@ const Tasks = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Tasks</h1>
-          <p className="text-gray-600 mt-1">Manage and track all your tasks</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Tasks</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Manage and track all your tasks</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
-          <Plus size={20} className="mr-2" />
-          New Task
-        </Button>
+        <CreateTaskModal onTaskCreated={handleTaskCreated}>
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            <Plus size={20} className="mr-2" />
+            New Task
+          </Button>
+        </CreateTaskModal>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="text-2xl font-bold text-gray-900">{taskCounts.total}</div>
-          <div className="text-sm text-gray-600">Total Tasks</div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{taskCounts.total}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Total Tasks</div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
-          <div className="text-2xl font-bold text-gray-600">{taskCounts.todo}</div>
-          <div className="text-sm text-gray-600">To Do</div>
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-2xl font-bold text-gray-600 dark:text-gray-400">{taskCounts.todo}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">To Do</div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-blue-600">{taskCounts.in_progress}</div>
-          <div className="text-sm text-gray-600">In Progress</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">In Progress</div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-green-600">{taskCounts.completed}</div>
-          <div className="text-sm text-gray-600">Completed</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Completed</div>
         </div>
       </div>
 

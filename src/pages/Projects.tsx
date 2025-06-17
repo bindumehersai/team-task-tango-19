@@ -4,12 +4,14 @@ import { Plus, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ProjectCard } from "@/components/ProjectCard";
+import { CreateProjectModal } from "@/components/CreateProjectModal";
 import { mockProjects, mockTasks } from "@/data/mockData";
 
 const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [projects, setProjects] = useState(mockProjects);
 
-  const filteredProjects = mockProjects.filter(project =>
+  const filteredProjects = projects.filter(project =>
     project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     project.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -18,18 +20,24 @@ const Projects = () => {
     return mockTasks.filter(task => task.projectId === projectId);
   };
 
+  const handleProjectCreated = (newProject: any) => {
+    setProjects(prev => [...prev, newProject]);
+  };
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
-          <p className="text-gray-600 mt-1">Manage and track your team projects</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Projects</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">Manage and track your team projects</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">
-          <Plus size={20} className="mr-2" />
-          New Project
-        </Button>
+        <CreateProjectModal onProjectCreated={handleProjectCreated}>
+          <Button className="bg-blue-600 hover:bg-blue-700">
+            <Plus size={20} className="mr-2" />
+            New Project
+          </Button>
+        </CreateProjectModal>
       </div>
 
       {/* Search */}

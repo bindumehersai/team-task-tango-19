@@ -40,53 +40,53 @@ const Dashboard = () => {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome back! Here's what's happening with your projects.</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Welcome back! Here's what's happening with your projects.</p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Total Tasks</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Tasks</CardTitle>
             <CheckSquare className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{totalTasks}</div>
-            <p className="text-xs text-gray-500 mt-1">Across all projects</p>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totalTasks}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Across all projects</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Completed</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</CardTitle>
             <CheckSquare className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{completedTasks}</div>
-            <p className="text-xs text-gray-500 mt-1">{Math.round((completedTasks / totalTasks) * 100)}% completion rate</p>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{completedTasks}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{Math.round((completedTasks / totalTasks) * 100)}% completion rate</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Overdue</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Overdue</CardTitle>
             <Clock className="h-4 w-4 text-red-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{overdueTasks}</div>
-            <p className="text-xs text-gray-500 mt-1">Need attention</p>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{overdueTasks}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Need attention</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Team Members</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">Team Members</CardTitle>
             <Users className="h-4 w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-900">{mockUsers.length}</div>
-            <p className="text-xs text-gray-500 mt-1">Active users</p>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{mockUsers.length}</div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Active users</p>
           </CardContent>
         </Card>
       </div>
@@ -123,7 +123,7 @@ const Dashboard = () => {
                     className="w-3 h-3 rounded-full mr-2"
                     style={{ backgroundColor: item.color }}
                   />
-                  <span className="text-sm text-gray-600">{item.name}</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">{item.name}</span>
                 </div>
               ))}
             </div>
